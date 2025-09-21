@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { getORM } from "~/lib/with-orm";
-import { Product } from "~/entities/Product";
+import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { getORM } from "@/lib/orm";
+import { Product } from "@/entities/Product";
 
 export const productRouter = createTRPCRouter({
   getAll: publicProcedure.query(async () => {

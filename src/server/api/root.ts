@@ -1,7 +1,7 @@
 
-import { productRouter } from "~/server/api/routers/product";
-import { cartRouter } from "~/server/api/routers/cart";
-import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+import { productRouter } from "@/server/api/routers/product";
+import { cartRouter } from "@/server/api/routers/cart";
+import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 
 /**
  * This is the primary router for your server.
