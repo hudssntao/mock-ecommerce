@@ -1,0 +1,48 @@
+{
+  // Biome as default formatter
+  "editor.defaultFormatter": "biomejs.biome",
+
+  // Enable format on save
+  "editor.formatOnSave": true,
+
+  // Enable format on paste
+  "editor.formatOnPaste": true,
+
+  // Enable format on type
+  "editor.formatOnType": true,
+
+  // Code actions on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit"
+  },
+
+  // Disable other formatters for supported files
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+
+  // Biome specific settings
+  "biome.lspBin": "node_modules/@biomejs/biome/bin/biome",
+
+  // Disable conflicting extensions
+  "prettier.enable": false,
+  "eslint.enable": false
+}
