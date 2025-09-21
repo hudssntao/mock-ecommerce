@@ -3,10 +3,10 @@ import { Cart } from './Cart';
 
 @Entity()
 export class Product {
-  @PrimaryKey()
+  @PrimaryKey({ type: 'number' })
   id!: number;
 
-  @Property()
+  @Property({ type: 'string' })
   name!: string;
 
   @Property({ type: 'text' })
@@ -15,6 +15,6 @@ export class Product {
   @Property({ type: 'decimal', precision: 10, scale: 2 })
   price!: number;
 
-  @Property()
+  @Property({ type: 'string' })
   imageUrl!: string;
 }

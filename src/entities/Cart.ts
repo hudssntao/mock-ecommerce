@@ -3,12 +3,12 @@ import { Product } from './Product';
 
 @Entity()
 export class Cart {
-  @PrimaryKey()
+  @PrimaryKey({ type: 'number' })
   id!: number;
 
   @ManyToOne(() => Product)
   product!: Product;
 
-  @Property()
+  @Property({ type: 'number' })
   quantity!: number;
 }
