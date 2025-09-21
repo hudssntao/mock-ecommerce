@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-import { getORM } from "@/lib/orm";
 import { Product } from "@/entities/Product";
+import { getORM } from "@/lib/orm";
+import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
 export const productRouter = createTRPCRouter({
   getAll: publicProcedure.query(async () => {
@@ -19,12 +19,14 @@ export const productRouter = createTRPCRouter({
     }),
 
   create: publicProcedure
-    .input(z.object({
-      name: z.string().min(1),
-      description: z.string().min(1),
-      price: z.number().positive(),
-      imageUrl: z.string().url(),
-    }))
+    .input(
+      z.object({
+        name: z.string().min(1),
+        description: z.string().min(1),
+        price: z.number().positive(),
+        imageUrl: z.string().url(),
+      })
+    )
     .mutation(async ({ input }) => {
       const orm = await getORM();
       const product = orm.em.create(Product, input);

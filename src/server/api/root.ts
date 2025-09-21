@@ -1,6 +1,5 @@
-
-import { productRouter } from "@/server/api/routers/product";
 import { cartRouter } from "@/server/api/routers/cart";
+import { productRouter } from "@/server/api/routers/product";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 
 /**

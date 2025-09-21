@@ -1,33 +1,37 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-import { getORM } from "@/lib/orm";
 import { Cart } from "@/entities/Cart";
 import { Product } from "@/entities/Product";
+import { getORM } from "@/lib/orm";
+import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
 export const cartRouter = createTRPCRouter({
   getAll: publicProcedure.query(async () => {
     const orm = await getORM();
-    const cartItems = await orm.em.find(Cart, {}, { populate: ['product'] });
+    const cartItems = await orm.em.find(Cart, {}, { populate: ["product"] });
     return cartItems;
   }),
 
   addItem: publicProcedure
-    .input(z.object({
-      productId: z.number(),
-      quantity: z.number().positive(),
-    }))
+    .input(
+      z.object({
+        productId: z.number(),
+        quantity: z.number().positive(),
+      })
+    )
     .mutation(async ({ input }) => {
       const orm = await getORM();
-      
+
       // Check if product exists
       const product = await orm.em.findOne(Product, { id: input.productId });
       if (!product) {
-        throw new Error('Product not found');
+        throw new Error("Product not found");
       }
 
       // Check if item already exists in cart
-      const existingCartItem = await orm.em.findOne(Cart, { product: input.productId });
-      
+      const existingCartItem = await orm.em.findOne(Cart, {
+        product: input.productId,
+      });
+
       if (existingCartItem) {
         // Update quantity
         existingCartItem.quantity += input.quantity;
@@ -45,16 +49,18 @@ export const cartRouter = createTRPCRouter({
     }),
 
   updateQuantity: publicProcedure
-    .input(z.object({
-      id: z.number(),
-      quantity: z.number().positive(),
-    }))
+    .input(
+      z.object({
+        id: z.number(),
+        quantity: z.number().positive(),
+      })
+    )
     .mutation(async ({ input }) => {
       const orm = await getORM();
       const cartItem = await orm.em.findOne(Cart, { id: input.id });
-      
+
       if (!cartItem) {
-        throw new Error('Cart item not found');
+        throw new Error("Cart item not found");
       }
 
       cartItem.quantity = input.quantity;
@@ -67,9 +73,9 @@ export const cartRouter = createTRPCRouter({
     .mutation(async ({ input }) => {
       const orm = await getORM();
       const cartItem = await orm.em.findOne(Cart, { id: input.id });
-      
+
       if (!cartItem) {
-        throw new Error('Cart item not found');
+        throw new Error("Cart item not found");
       }
 
       await orm.em.removeAndFlush(cartItem);

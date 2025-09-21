@@ -18,7 +18,8 @@
       "!**/*.d.ts",
       "!**/pnpm-lock.yaml",
       "!**/package-lock.json",
-      "!**/yarn.lock"
+      "!**/yarn.lock",
+      "!**/migrations"
     ]
   },
   "formatter": {

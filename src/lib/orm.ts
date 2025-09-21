@@ -1,5 +1,5 @@
-import { MikroORM, EntityManager } from '@mikro-orm/core';
-import config from '../mikro-orm.config';
+import { type EntityManager, MikroORM } from "@mikro-orm/core";
+import config from "../mikro-orm.config";
 
 let ormInstance: MikroORM | undefined;
 
