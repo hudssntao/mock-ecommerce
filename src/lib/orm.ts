@@ -1,13 +1,15 @@
 import { type EntityManager, MikroORM } from "@mikro-orm/core";
 import config from "../mikro-orm.config";
 
-let ormInstance: MikroORM | undefined;
+declare global {
+  var __mikroOrm: MikroORM | undefined;
+}
 
 const getORM = async (): Promise<MikroORM> => {
-  if (!ormInstance) {
-    ormInstance = await MikroORM.init(config);
+  if (!global.__mikroOrm) {
+    global.__mikroOrm = await MikroORM.init(config);
   }
-  return ormInstance;
+  return global.__mikroOrm;
 };
 
 const getEM = async (): Promise<EntityManager> => {
