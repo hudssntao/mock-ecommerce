@@ -9,7 +9,6 @@ type ProductDetailsProps = {
   description: string;
   price: number;
   imageUrl: string;
-  initialCartQuantity?: number;
 };
 
 export default function ProductDetails({
@@ -18,7 +17,6 @@ export default function ProductDetails({
   description,
   price,
   imageUrl,
-  initialCartQuantity = 0,
 }: ProductDetailsProps) {
   return (
     <div className="flex items-center justify-center gap-6 w-[1024px] min-h-[512px]">
@@ -38,8 +36,10 @@ export default function ProductDetails({
         </p>
         <ProductActions
           id={id}
+          name={name}
+          description={description}
           price={price}
-          initialCartQuantity={initialCartQuantity}
+          imageUrl={imageUrl}
           className="justify-start gap-4"
         />
       </div>

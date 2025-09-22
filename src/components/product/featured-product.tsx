@@ -5,7 +5,15 @@ import Link from "next/link";
 import { api } from "@/trpc/react";
 
 export default function FeaturedProduct() {
-  const { data: product, isLoading, error } = api.product.getRandom.useQuery();
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = api.product.getRandom.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchInterval: false,
+  });
 
   if (isLoading) {
     return (

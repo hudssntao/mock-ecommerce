@@ -68,13 +68,12 @@ export default function ProductFeed({ batchSize = 12 }: ProductFeedProps) {
             description={product.description}
             price={product.price}
             imageUrl={product.imageUrl}
-            initialCartQuantity={0}
           />
         );
       })}
       {isLoading &&
         Array.from({ length: batchSize }).map((_, index) => (
-          <ProductCardSkeleton key={index} />
+          <ProductCardSkeleton key={`skeleton-${index}`} />
         ))}
     </div>
   );

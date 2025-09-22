@@ -1,30 +1,45 @@
 import { Button, ButtonGroup } from "@heroui/react";
 import { Minus, Plus } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useCartWithSync } from "@/hooks";
 import { formatPrice } from "@/utils/format";
 
 type ProductActionsProps = {
   id: number;
+  name: string;
+  description: string;
   price: number;
-  initialCartQuantity: number;
+  imageUrl: string;
   className?: string;
 };
 
 export default function ProductActions({
   id,
+  name,
+  description,
   price,
-  initialCartQuantity,
+  imageUrl,
   className,
 }: ProductActionsProps) {
-  const [cartQuantity, setCartQuantity] = useState(initialCartQuantity);
+  const { updateQuantity, getCartItem } = useCartWithSync();
 
-  const handleAddToCart = () => {
-    setCartQuantity((prev) => prev + 1);
+  const cartItem = getCartItem(id);
+  const cartQuantity = cartItem?.quantity || 0;
+
+  const product = {
+    id,
+    name,
+    description,
+    price,
+    imageUrl,
   };
 
-  const handleRemoveFromCart = () => {
-    setCartQuantity((prev) => Math.max(0, prev - 1));
+  const handleAddToCart = async () => {
+    await updateQuantity(id, cartQuantity + 1, product);
+  };
+
+  const handleRemoveFromCart = async () => {
+    await updateQuantity(id, cartQuantity - 1, product);
   };
 
   return (

@@ -11,7 +11,6 @@ interface ProductCardProps {
   description: string;
   price: number;
   imageUrl: string;
-  initialCartQuantity?: number;
 }
 
 export default function ProductCard({
@@ -21,7 +20,6 @@ export default function ProductCard({
   description,
   price,
   imageUrl,
-  initialCartQuantity = 0,
 }: ProductCardProps) {
   return (
     <Card
@@ -50,8 +48,10 @@ export default function ProductCard({
       <CardFooter className="flex justify-between items-center w-full p-0 pt-1">
         <ProductActions
           id={id}
+          name={name}
+          description={description}
           price={price}
-          initialCartQuantity={initialCartQuantity}
+          imageUrl={imageUrl}
         />
       </CardFooter>
     </Card>
