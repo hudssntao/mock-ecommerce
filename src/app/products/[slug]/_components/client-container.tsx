@@ -2,7 +2,7 @@
 
 import ProductDetails from "@/components/product/product-details";
 import ProductFeed from "@/components/product/product-feed";
-import type { Product } from "@/entities/Product";
+import type { Product } from "@/db/entities/Product";
 
 type ClientContainerProps = {
   product: Product;

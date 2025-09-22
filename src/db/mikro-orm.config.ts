@@ -1,7 +1,7 @@
 import { defineConfig } from "@mikro-orm/postgresql";
+import { env } from "../env";
 import { Cart } from "./entities/Cart";
 import { Product } from "./entities/Product";
-import { env } from "./env";
 
 export default defineConfig({
   entities: [Product, Cart],

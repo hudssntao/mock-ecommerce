@@ -9,7 +9,7 @@
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { getEM } from "@/lib/orm";
+import { getEM } from "@/db/orm";
 
 /**
  * 1. CONTEXT

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Product } from "@/entities/Product";
+import { Product } from "@/db/entities/Product";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
 export const productRouter = createTRPCRouter({

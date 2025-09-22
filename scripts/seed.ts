@@ -1,5 +1,5 @@
-import { Product } from "../src/entities/Product";
-import { getEM, getORM } from "../src/lib/orm";
+import { Product } from "../src/db/entities/Product";
+import { getEM, getORM } from "../src/db/orm";
 
 const sampleProducts = [
   {

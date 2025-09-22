@@ -17,7 +17,7 @@ export default function FeaturedProduct() {
 
   if (isLoading) {
     return (
-      <Skeleton className="w-[1024px] h-[408px] rounded-xl bg-gray-50 animate-pulse" />
+      <Skeleton className="w-[1024px] h-[408px] rounded-xl bg-gray-100 animate-pulse" />
     );
   }
 

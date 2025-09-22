@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar";
-import { CartProvider } from "@/lib/cart-context";
+import { CartProvider } from "@/lib";
 import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {

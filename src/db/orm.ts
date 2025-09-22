@@ -1,5 +1,5 @@
 import { type EntityManager, MikroORM } from "@mikro-orm/core";
-import config from "../mikro-orm.config";
+import config from "./mikro-orm.config";
 
 declare global {
   var __mikroOrm: MikroORM | undefined;

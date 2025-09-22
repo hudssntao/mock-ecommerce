@@ -1,13 +1,13 @@
 import { redirect } from "next/navigation";
-import type { Product } from "@/entities/Product";
+import type { Product } from "@/db/entities/Product";
 import { api } from "@/trpc/server";
 import { serialize } from "@/utils/serialize";
 import ClientContainer from "./_components/client-container";
 
 type ProductPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function ProductPage({ params }: ProductPageProps) {
