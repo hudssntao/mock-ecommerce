@@ -12,5 +12,9 @@ export default defineConfig({
   user: env.DATABASE_USER,
   password: env.DATABASE_PASSWORD,
 
+  migrations: {
+    path: "./src/db/migrations",
+  },
+
   debug: env.NODE_ENV === "development",
 });

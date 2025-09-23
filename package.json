@@ -16,9 +16,12 @@
     "check:fix": "biome check --write .",
     "db:up": "docker-compose up -d postgres",
     "db:down": "docker-compose down",
-    "db:create-migration": "dotenv -e .env.local -- mikro-orm migration:create",
-    "db:migrate": "dotenv -e .env.local -- mikro-orm migration:up",
-    "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts"
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "db:create-migration": "dotenv -e .env.local -- mikro-orm migration:create --config src/db/mikro-orm.config.ts",
+    "db:migrate": "dotenv -e .env.local -- mikro-orm migration:up --config src/db/mikro-orm.config.ts",
+    "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",
+    "startup": "pnpm docker:up && pnpm i && pnpm db:migrate && pnpm db:seed"
   },
   "dependencies": {
     "@heroui/react": "^2.8.4",
