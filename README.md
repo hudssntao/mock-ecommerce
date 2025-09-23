@@ -53,3 +53,11 @@ Spin down docker containers with the following command:
 `pnpm docker:down`
 
 To access the site again, just run `pnpm startup`.
+
+# Features:
+
+1. NextJS SEO optimizations (sitemap, robots.txt, static & dynamic metadata, product pages use SSR)
+2. Infinite scroll for all product feeds
+3. Loading states for all data fetched client side
+4. Script for seeding llm-generated data
+5. Docker deployment workflow
