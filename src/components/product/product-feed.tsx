@@ -71,7 +71,7 @@ export default function ProductFeed({ batchSize = 12 }: ProductFeedProps) {
           />
         );
       })}
-      {isLoading &&
+      {(isLoading || isFetchingNextPage) &&
         Array.from({ length: batchSize }).map((_, index) => (
           <ProductCardSkeleton key={`skeleton-${index}`} />
         ))}
