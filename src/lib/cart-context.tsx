@@ -84,6 +84,20 @@ const cart_reducer = (state: CartState, action: CartAction): CartState => {
         isLoading: action.payload.isLoading,
       };
     }
+      
+    case "SET_CART": {
+      const totals = {
+        totalItems: action.payload.items.reduce(
+          (sum, item) => sum + item.quantity,
+          0
+        ),
+      };
+      return {
+        items: action.payload.items,
+        ...totals,
+        isLoading: false,
+      };
+    }
 
     default:
       return state;
