@@ -71,4 +71,13 @@ export const productRouter = createTRPCRouter({
     const randomIndex = Math.floor(seededRandom(seed) * products.length);
     return products[randomIndex];
   }),
+
+  // NOTE: For larger product catalogs (10k+ products), consider implementing
+  // pagination to avoid memory issues and improve performance
+  getAllForSitemap: publicProcedure.query(async ({ ctx }) => {
+    const products = await ctx.em.find(Product, {}, {
+      orderBy: { id: "ASC" },
+    });
+    return products;
+  }),
 });
