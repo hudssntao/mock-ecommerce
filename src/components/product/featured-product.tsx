@@ -4,6 +4,40 @@ import { Image, Skeleton } from "@heroui/react";
 import Link from "next/link";
 import { api } from "@/trpc/react";
 
+/**
+ * Featured product component displaying the daily highlighted product.
+ * 
+ * Fetches and displays the featured product with optimized caching strategy.
+ * The featured product rotates daily using a deterministic algorithm on the server.
+ * Includes loading states and error handling for a smooth user experience.
+ * 
+ * @returns JSX element representing the featured product or loading state
+ * 
+ * @example
+ * ```typescript
+ * // On homepage
+ * export default function Home() {
+ *   return (
+ *     <main>
+ *       <FeaturedProduct />
+ *       <ProductFeed />
+ *     </main>
+ *   );
+ * }
+ * ```
+ * 
+ * @features
+ * - Daily product rotation with server-side deterministic selection
+ * - Optimized caching (24-hour stale time and garbage collection)
+ * - Loading skeleton with matching dimensions
+ * - Error handling with graceful fallback
+ * - Click-through navigation to product detail page
+ * - Large hero image format (1024x408px)
+ * 
+ * @performance
+ * - No refetch on window focus or reconnect
+ * - Skeleton loading prevents layout shift
+ */
 export default function FeaturedProduct() {
   const {
     data: product,

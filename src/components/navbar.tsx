@@ -4,6 +4,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/hooks";
 
+/**
+ * Navigation bar component displayed at the top of all pages.
+ * 
+ * Features the application logo, brand name, and cart indicator with item count.
+ * Provides navigation back to the homepage and visual feedback for cart state
+ * including loading states and item counts.
+ * 
+ * @returns JSX element representing the navigation bar
+ * 
+ * @example
+ * ```typescript
+ * // In layout.tsx
+ * export default function RootLayout({ children }) {
+ *   return (
+ *     <html>
+ *       <body>
+ *         <TRPCReactProvider>
+ *           <CartProvider>
+ *             <Navbar />
+ *             {children}
+ *           </CartProvider>
+ *         </TRPCReactProvider>
+ *       </body>
+ *     </html>
+ *   );
+ * }
+ * ```
+ * 
+ * @features
+ * - Responsive design (1024px max width)
+ * - Logo and brand name linking to homepage
+ * - Cart icon with dynamic item count badge
+ * - Loading state indicator for cart operations
+ * - Visual feedback for empty/populated cart states
+ */
 export default function Navbar() {
   const { state } = useCart();
 

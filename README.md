@@ -1,10 +1,38 @@
-# Quickstart guide
+# Mock E-commerce Application
 
-> Docker is a pre-requisite for this quickstart. Please ensure Docker is installed.
+A modern, full-stack e-commerce application built with Next.js, tRPC, and PostgreSQL. Features a complete product catalog with shopping cart functionality, infinite scroll, and comprehensive SEO optimizations.
 
-1. Add the following environment variables to a `.env.local` file in the project root:
+## 🏗️ Architecture Overview
 
+### Tech Stack
+- **Frontend**: Next.js 15 (App Router), React 19, TypeScript
+- **Backend**: tRPC, MikroORM with PostgreSQL
+- **State Management**: React Context with useReducer
+- **UI Components**: HeroUI (NextUI), Tailwind CSS
+- **Deployment**: Docker with Docker Compose
+- **Development**: Biome (linting/formatting), pnpm
+
+### System Architecture
 ```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Next.js App   │    │   tRPC Server    │    │   PostgreSQL    │
+│                 │    │                  │    │                 │
+│ • App Router    │◄──►│ • Product API    │◄──►│ • Products      │
+│ • Client/Server │    │ • Cart API       │    │ • Cart Items    │
+│ • React Context │    │ • MikroORM       │    │                 │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+- **Docker & Docker Compose** (required)
+- **Node.js 18+** and **pnpm** (for local development)
+
+### 1. Environment Setup
+
+Create `.env.local` for local development:
+```bash
 NODE_ENV=development
 
 # Database Config
@@ -18,9 +46,8 @@ MIKRO_ORM_CLI_USE_TS_NODE=true
 MIKRO_ORM_CLI_TS_CONFIG_PATH=./tsconfig.orm.json
 ```
 
-2. Add the following environment variables to a `.env.docker` file in the project root:
-
-```
+Create `.env.docker` for containerized deployment:
+```bash
 # Local Docker Config
 POSTGRES_DB=ecommerce
 POSTGRES_USER=postgres
@@ -35,29 +62,67 @@ DATABASE_PASSWORD=password
 
 MIKRO_ORM_CLI_USE_TS_NODE=true
 MIKRO_ORM_CLI_TS_CONFIG_PATH=./tsconfig.orm.json
-
 ```
 
-3. Run the following command:
+### 2. One-Command Startup
 
-`pnpm startup`
+```bash
+pnpm startup
+```
 
-> Ensure ports 3000 and 5432 are available.
+This command will:
+1. Start PostgreSQL container
+2. Install dependencies
+3. Run database migrations
+4. Seed the database with sample products
+5. Start the development server
 
-4. Access the site at http://localhost:3000
+> 🔥 **Ports Required**: Ensure ports `3000` and `5432` are available.
 
-## Cleanup
+### 3. Access the Application
 
-Spin down docker containers with the following command:
+- **Web App**: http://localhost:3000
+- **Database**: `localhost:5432` (postgres/password)
 
-`pnpm docker:down`
+### 4. Shutdown
 
-To access the site again, just run `pnpm startup`.
+```bash
+pnpm docker:down
+```
 
-# Features:
+## 🧪 Key Implementation Details
 
 1. NextJS SEO optimizations (sitemap, robots.txt, static & dynamic metadata, product pages use SSR)
 2. Infinite scroll for all product feeds
 3. Loading states for all data fetched client side
 4. Script for seeding llm-generated data
 5. Docker deployment workflow
+
+## 🛠️ Development
+
+### Available Scripts
+
+```bash
+# Development
+pnpm dev              # Start development server with Turbo
+pnpm build            # Build for production
+pnpm start            # Start production server
+pnpm preview          # Build and start production server
+
+# Code Quality
+pnpm typecheck        # TypeScript type checking
+pnpm lint             # Lint code with Biome
+pnpm format           # Format code with Biome
+pnpm check            # Run both linting and formatting
+
+# Database
+pnpm db:up            # Start PostgreSQL container only
+pnpm db:down          # Stop all containers
+pnpm db:migrate       # Run database migrations
+pnpm db:seed          # Seed database with sample data
+pnpm db:create-migration  # Create new migration
+
+# Docker
+pnpm docker:up        # Start all containers
+pnpm docker:down      # Stop all containers
+```
