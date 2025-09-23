@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import type { Product } from "@/db/entities/Product";
 import { api } from "@/trpc/server";
-import { serialize } from "@/utils/serialize";
-import ClientContainer from "./_components/client-container";
+import ProductDetails from "@/components/product/product-details";
+import ProductFeed from "@/components/product/product-feed";
 
 type ProductPageProps = {
   params: Promise<{
@@ -29,5 +29,31 @@ export default async function ProductPage({ params }: ProductPageProps) {
     redirect("/");
   }
 
-  return <ClientContainer product={serialize(product)} />;
+  return (
+    <div className="flex flex-col justify-center items-center gap-6 min-h-screen">
+      <div className="w-full flex justify-center">
+        <div className="w-[1024px] flex flex-col gap-4">
+          <ProductDetails
+            id={product.id}
+            name={product.name}
+            description={product.description}
+            price={product.price}
+            imageUrl={product.imageUrl}
+          />
+
+          <div className="flex w-full justify-center">
+            <div className="w-[600px] h-px bg-zinc-400"></div>
+          </div>
+
+          <h2 className="font-sans font-medium text-[32px] leading-10 tracking-tight">
+            Similar Products
+          </h2>
+
+          <div className="flex justify-center">
+            <ProductFeed batchSize={12} excludeId={product.id} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
