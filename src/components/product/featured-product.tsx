@@ -9,10 +9,12 @@ export default function FeaturedProduct() {
     data: product,
     isLoading,
     error,
-  } = api.product.getRandom.useQuery(undefined, {
+  } = api.product.getFeatured.useQuery(undefined, {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchInterval: false,
+    staleTime: 24 * 60 * 60 * 1000,
+    gcTime: 24 * 60 * 60 * 1000, 
   });
 
   if (isLoading) {

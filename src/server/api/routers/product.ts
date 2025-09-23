@@ -8,16 +8,27 @@ export const productRouter = createTRPCRouter({
       z.object({
         limit: z.number().min(1).max(100).default(10),
         cursor: z.number().optional(),
+        excludeId: z.number().optional(),
       })
     )
     .query(async ({ input, ctx }) => {
       const { em } = ctx;
 
-      const { limit, cursor } = input;
+      const { limit, cursor, excludeId } = input;
+
+      const whereClause: any = {};
+      if (cursor) {
+        whereClause.id = { $gt: cursor };
+      }
+      if (excludeId) {
+        whereClause.id = whereClause.id 
+          ? { ...whereClause.id, $ne: excludeId }
+          : { $ne: excludeId };
+      }
 
       const products = await em.find(
         Product,
-        cursor ? { id: { $gt: cursor } } : {},
+        whereClause,
         {
           orderBy: { id: "ASC" },
           limit: limit + 1,
@@ -43,12 +54,21 @@ export const productRouter = createTRPCRouter({
       return product;
     }),
 
-  getRandom: publicProcedure.query(async ({ ctx }) => {
+  getFeatured: publicProcedure.query(async ({ ctx }) => {
     const products = await ctx.em.find(Product, {});
     if (products.length === 0) {
       return null;
     }
-    const randomIndex = Math.floor(Math.random() * products.length);
+    
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    
+    const seededRandom = (seed: number) => {
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    };
+    
+    const randomIndex = Math.floor(seededRandom(seed) * products.length);
     return products[randomIndex];
   }),
 });

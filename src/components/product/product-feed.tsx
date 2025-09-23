@@ -7,9 +7,10 @@ import ProductCard, { ProductCardSkeleton } from "./product-card";
 
 interface ProductFeedProps {
   batchSize?: number;
+  excludeId?: number;
 }
 
-export default function ProductFeed({ batchSize = 12 }: ProductFeedProps) {
+export default function ProductFeed({ batchSize = 12, excludeId }: ProductFeedProps) {
   const { ref: lastItemRef, inView } = useInView({
     threshold: 0.1,
     rootMargin: "100px",
@@ -24,7 +25,7 @@ export default function ProductFeed({ batchSize = 12 }: ProductFeedProps) {
     isError,
     error,
   } = api.product.getInfinite.useInfiniteQuery(
-    { limit: batchSize },
+    { limit: batchSize, excludeId },
     {
       getNextPageParam: (lastPage) => lastPage.nextCursor,
     }
